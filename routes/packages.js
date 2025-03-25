@@ -32,16 +32,35 @@ let packages = [
   },
 ];
 
-// GET all packages
-router.get('/', (req, res) => {
-  res.json({ data: packages });
+// // GET all packages
+// router.get('/', (req, res) => {
+//   res.json({ data: packages });
+// });
+
+// // GET a single package by ID
+// router.get('/:id', (req, res) => {
+//   const pkg = packages.find((p) => p.id === Number(req.params.id));
+//   if (!pkg) return res.status(404).json({ error: 'Package not found' });
+//   res.json({ data: pkg });
+// });
+
+// POST a new package
+router.post('/', (req, res) => {
+  const newPackage = {
+    id: Date.now(),
+    ...req.body,
+  };
+  packages.push(newPackage);
+  res.status(201).json({ data: newPackage });
 });
 
-// GET a single package by ID
-router.get('/:id', (req, res) => {
-  const pkg = packages.find((p) => p.id === Number(req.params.id));
-  if (!pkg) return res.status(404).json({ error: 'Package not found' });
-  res.json({ data: pkg });
+// PATCH update a package
+router.patch('/:id', (req, res) => {
+  const index = packages.findIndex((p) => p.id === Number(req.params.id));
+  if (index === -1) return res.status(404).json({ error: 'Package not found' });
+
+  packages[index] = { ...packages[index], ...req.body };
+  res.json({ data: packages[index] });
 });
 
 export default router;
