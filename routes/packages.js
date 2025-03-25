@@ -2,6 +2,7 @@ import express from 'express';
 
 const router = express.Router();
 
+// In-memory data store
 let packages = [
   {
     id: 1,
@@ -32,24 +33,35 @@ let packages = [
   },
 ];
 
-// // GET all packages
-// router.get('/', (req, res) => {
-//   res.json({ data: packages });
-// });
+// GET all packages
+router.get('/', (req, res) => {
+  res.json({ data: packages });
+});
 
-// // GET a single package by ID
-// router.get('/:id', (req, res) => {
-//   const pkg = packages.find((p) => p.id === Number(req.params.id));
-//   if (!pkg) return res.status(404).json({ error: 'Package not found' });
-//   res.json({ data: pkg });
-// });
+// GET a single package by ID
+router.get('/:id', (req, res) => {
+  const pkg = packages.find((p) => p.id === Number(req.params.id));
+  if (!pkg) return res.status(404).json({ error: 'Package not found' });
+  res.json({ data: pkg });
+});
 
 // POST a new package
 router.post('/', (req, res) => {
+  const { name, unitPrice, imageUrl, soldOut = false, season = [] } = req.body;
+
+  if (!name || !unitPrice || !imageUrl) {
+    return res.status(400).json({ error: 'Missing required fields' });
+  }
+
   const newPackage = {
     id: Date.now(),
-    ...req.body,
+    name,
+    unitPrice,
+    imageUrl,
+    soldOut,
+    season,
   };
+
   packages.push(newPackage);
   res.status(201).json({ data: newPackage });
 });
@@ -59,8 +71,11 @@ router.patch('/:id', (req, res) => {
   const index = packages.findIndex((p) => p.id === Number(req.params.id));
   if (index === -1) return res.status(404).json({ error: 'Package not found' });
 
-  packages[index] = { ...packages[index], ...req.body };
-  res.json({ data: packages[index] });
+  const existing = packages[index];
+  const updated = { ...existing, ...req.body };
+
+  packages[index] = updated;
+  res.json({ data: updated });
 });
 
 export default router;
