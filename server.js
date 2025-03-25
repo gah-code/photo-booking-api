@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import bookingsRouter from './routes/bookings.js';
 import locationsRouter from './routes/locations.js';
+import packagesRouter from './routes/packages.js';
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(express.json()); // to parse JSON body
 app.use('/api/bookings', bookingsRouter);
 app.use('/api/locations', locationsRouter);
+app.use('/api/packages', packagesRouter);
 
 app.get('/', (req, res) => {
   res.send('📸 Photography Booking API is running');
