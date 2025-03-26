@@ -5,7 +5,8 @@ import bookingsRouter from './routes/bookings.js';
 import locationsRouter from './routes/locations.js';
 import packagesRouter from './routes/packages.js';
 import menuRouter from './routes/menu.js';
-import ordersRouter from './routes/order.js';
+// import ordersRouter from './routes/order.js';
+import orderRouter from './routes/order.js';
 
 dotenv.config();
 
@@ -18,7 +19,7 @@ app.use('/api/bookings', bookingsRouter);
 app.use('/api/locations', locationsRouter);
 app.use('/api/packages', packagesRouter);
 app.use('/api/menu', menuRouter);
-app.use('/api/order', ordersRouter);
+app.use('/api/order', orderRouter);
 
 app.get('/', (req, res) => {
   res.send('📸 Photography Booking API is running');
