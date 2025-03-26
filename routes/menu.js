@@ -207,7 +207,7 @@ const menu = [
 
 // GET all pizzas
 router.get('/', (req, res) => {
-  res.json({ status: 'success', data: pizzas });
+  res.json({ status: 'success', data: menu });
 });
 
 export default router;
