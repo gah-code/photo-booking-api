@@ -2,7 +2,7 @@ import express from 'express';
 
 const router = express.Router();
 
-const pizzas = [
+const menu = [
   {
     id: 1,
     name: 'Margherita',

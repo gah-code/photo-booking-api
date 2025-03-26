@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import bookingsRouter from './routes/bookings.js';
 import locationsRouter from './routes/locations.js';
 import packagesRouter from './routes/packages.js';
-import pizzasRouter from './routes/pizzas.js';
+import menuRouter from './routes/menu.js';
 import ordersRouter from './routes/orders.js';
 
 dotenv.config();
@@ -17,7 +17,7 @@ app.use(express.json()); // to parse JSON body
 app.use('/api/bookings', bookingsRouter);
 app.use('/api/locations', locationsRouter);
 app.use('/api/packages', packagesRouter);
-app.use('/api/pizzas', pizzasRouter);
+app.use('/api/menu', menuRouter);
 app.use('/api/order', ordersRouter);
 
 app.get('/', (req, res) => {
