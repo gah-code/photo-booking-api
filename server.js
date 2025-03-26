@@ -5,7 +5,7 @@ import bookingsRouter from './routes/bookings.js';
 import locationsRouter from './routes/locations.js';
 import packagesRouter from './routes/packages.js';
 import menuRouter from './routes/menu.js';
-import ordersRouter from './routes/orders.js';
+import ordersRouter from './routes/order.js';
 
 dotenv.config();
 
